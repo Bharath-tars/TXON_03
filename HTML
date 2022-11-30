@@ -1,0 +1,29 @@
+        <template v-if="todo.length">
+          <transition-group name="todolist" tag="ul">
+            <li v-for="item in todoByStatus" v-bind:class="item.done ? 'done' : ''" v-bind:key="item.id">
+              <span class="label">{{item.label}}</span>
+              <div class="actions">
+                <button class="btn-picto" type="button" v-on:click="markAsDoneOrUndone(item)" v-bind:aria-label="item.done ? 'Undone' : 'Done'" v-bind:title="item.done ? 'Undone' : 'Done'">
+                  <i aria-hidden="true" class="material-icons">{{ item.done ? 'check_box' : 'check_box_outline_blank' }}</i>
+                </button>
+                <button class="btn-picto" type="button" v-on:click="deleteItemFromList(item)" aria-label="Delete" title="Delete">
+                  <i aria-hidden="true" class="material-icons">delete</i>
+                </button>
+              </div>
+            </li>
+          </transition-group>
+          <togglebutton 
+                        label="Move settled tasks to the end?"
+                        name="todosort"
+                        v-on:clicked="clickontoogle" />
+        </template>
+        <p v-else class="emptylist">Your Todo list is empty.</p>
+      
+        <form name="newform" v-on:submit.prevent="addItem">
+          <label for="newitem">Add U'r tasks</label>
+          <input type="text" name="newitem" id="newitem" v-model="newitem">
+          <button type="submit">Add item</button>
+        </form>
+      </main>
+      <h1 class="hehe">Made with 💚 to you by Bharath Sudarsanam</h1>
+</body>
